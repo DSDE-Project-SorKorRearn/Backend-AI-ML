@@ -1,6 +1,5 @@
 #Backend AI ML for Sorkorrearn
 
-Template for CEDT Year 2 project.
 
 ## Structure
 
