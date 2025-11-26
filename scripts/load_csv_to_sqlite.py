@@ -70,7 +70,7 @@ def load_data():
     # Filter columns that exist in the dataframe and match the model (optional, but good practice)
     # For now, we assume the CSV + processing matches the model fields.
 
-    df.to_sql("traffy", engine, if_exists="replace", index=False)
+    df.to_sql("traffy", engine, if_exists="replace", index=True)
 
     print("Done!")
 

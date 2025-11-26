@@ -9,7 +9,7 @@ def get_time_series_stats(db: Session):
         db.query(
             func.strftime("%Y", Traffy.timestamp).label("year"),
             func.strftime("%m", Traffy.timestamp).label("month"),
-            func.count(Traffy.id).label("count"),
+            func.count(Traffy.index).label("count"),
         )
         .group_by("year", "month")
         .all()
@@ -18,7 +18,7 @@ def get_time_series_stats(db: Session):
 
 def get_province_stats(db: Session):
     return (
-        db.query(Traffy.province, func.count(Traffy.ticket_id).label("count"))
+        db.query(Traffy.province, func.count(Traffy.index).label("count"))
         .group_by(Traffy.province)
         .all()
     )
@@ -26,7 +26,7 @@ def get_province_stats(db: Session):
 
 def get_district_stats(db: Session):
     return (
-        db.query(Traffy.district, func.count(Traffy.ticket_id).label("count"))
+        db.query(Traffy.district, func.count(Traffy.index).label("count"))
         .group_by(Traffy.district)
         .all()
     )
