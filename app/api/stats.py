@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 from app.db.database import get_db
 from app.services import stats_service
-from app.schemas.stats import TimeSeriesData, ProvinceData, DistrictData
+from app.schemas.stats import TimeSeriesData, ProvinceData, DistrictData, TypeData
 
 router = APIRouter(prefix="/stats", tags=["Stats"])
 
@@ -22,3 +22,7 @@ def get_by_district(db: Session = Depends(get_db)):
 @router.get("/by-district/{district_name}", response_model=DistrictData)
 def get_by_district_name(district_name: str, db: Session = Depends(get_db)):
     return stats_service.get_district_stats_by_name(db, district_name)
+
+@router.get("/by-type", response_model=List[TypeData])
+def get_by_type(db: Session = Depends(get_db), type_name: Optional[str] = Query(None)):
+    return stats_service.get_type_stats(db)

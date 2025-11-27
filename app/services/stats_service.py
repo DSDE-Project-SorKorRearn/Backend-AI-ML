@@ -1,6 +1,6 @@
 from sqlalchemy import func
 from sqlalchemy.orm import Session
-
+from typing import Optional
 from app.db.models import Traffy
 
 
@@ -11,6 +11,7 @@ def get_time_series_stats(db: Session):
             func.strftime("%m", Traffy.timestamp).label("month"),
             func.count(Traffy.index).label("count"),
         )
+        .filter(Traffy.timestamp != None)
         .group_by("year", "month")
         .all()
     )
@@ -37,4 +38,11 @@ def get_district_stats_by_name(db: Session, district_name: str):
         .filter(Traffy.district == district_name)
         .group_by(Traffy.district)
         .first()
+    )
+
+def get_type_stats(db: Session):
+    return (
+        db.query(Traffy.traffy_type, func.count(Traffy.index).label("count"))
+        .group_by(Traffy.traffy_type)
+        .all()
     )
