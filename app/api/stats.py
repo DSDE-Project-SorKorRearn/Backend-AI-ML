@@ -18,3 +18,7 @@ def get_by_province(db: Session = Depends(get_db)):
 @router.get("/by-district", response_model=List[DistrictData])
 def get_by_district(db: Session = Depends(get_db)):
     return stats_service.get_district_stats(db)
+
+@router.get("/by-district/{district_name}", response_model=DistrictData)
+def get_by_district_name(district_name: str, db: Session = Depends(get_db)):
+    return stats_service.get_district_stats_by_name(db, district_name)

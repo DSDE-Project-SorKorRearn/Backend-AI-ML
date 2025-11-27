@@ -30,3 +30,11 @@ def get_district_stats(db: Session):
         .group_by(Traffy.district)
         .all()
     )
+
+def get_district_stats_by_name(db: Session, district_name: str):
+    return (
+        db.query(Traffy.district, func.count(Traffy.index).label("count"))
+        .filter(Traffy.district == district_name)
+        .group_by(Traffy.district)
+        .first()
+    )
