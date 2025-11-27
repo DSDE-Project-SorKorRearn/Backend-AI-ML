@@ -7,7 +7,6 @@ class Traffy(Base):
     __tablename__ = "traffy"
 
     index = Column(Integer, primary_key=True, index=True)
-    
     traffy_type = Column(String, index=True)  # Maps to 'type'
     organization = Column(String)
     detail = Column(Text)  # Maps to 'comment'
