@@ -16,3 +16,4 @@ class DistrictData(BaseModel):
 class TypeData(BaseModel):
     traffy_type: str
     count: int
+

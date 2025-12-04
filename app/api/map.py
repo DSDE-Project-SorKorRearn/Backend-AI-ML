@@ -10,6 +10,6 @@ from app.services import map_service
 router = APIRouter(prefix="/map", tags=["Map"])
 
 
-@router.get("/traffy", response_model=List[MapPoint])
+@router.get("/traffy",response_model=List[MapPoint])
 def get_map_traffy(db: Session = Depends(get_db)):
     return map_service.get_map_data(db)
