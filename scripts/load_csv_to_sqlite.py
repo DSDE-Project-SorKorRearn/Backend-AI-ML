@@ -45,8 +45,8 @@ def load_data():
                 return None, None
 
         coords = df["coords"].apply(split_coords)
-        df["latitude"] = coords.apply(lambda x: x[0])
-        df["longitude"] = coords.apply(lambda x: x[1])
+        df["latitude"] = coords.apply(lambda x: x[1])
+        df["longitude"] = coords.apply(lambda x: x[0])
         df = df.drop(columns=["coords"])
 
     # Convert timestamp and last_activity to datetime

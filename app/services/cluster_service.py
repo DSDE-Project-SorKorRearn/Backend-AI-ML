@@ -11,7 +11,6 @@ def get_cluster_data(db: Session):
     query = db.query(
         Traffy.province, Traffy.district, func.count(Traffy.index).label("count")
     ).group_by(Traffy.province, Traffy.district)
-
     df = pd.read_sql(query.statement, db.bind)
 
     if df.empty:
