@@ -1,15 +1,14 @@
-from typing import List
-
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-
-from app.db.database import get_db
-from app.schemas.cluster import ClusterResult
-from app.services import cluster_service
+from fastapi import APIRouter, HTTPException, Response
+from app.config import settings
 
 router = APIRouter(prefix="/cluster", tags=["Cluster"])
 
+@router.get("/traffy")
+def get_cluster_traffy():
+    try:
+        return Response(content=settings.CLUSTER_CACHE, media_type="text/csv")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/traffy", response_model=List[ClusterResult])
-def get_cluster_traffy(db: Session = Depends(get_db)):
-    return cluster_service.get_cluster_data(db)
+
+

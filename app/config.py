@@ -12,10 +12,19 @@ class Settings:
             cls._instance._initialize()
         return cls._instance
 
+    def load_csv(self):
+        print("Loading CSV into RAM...")
+        with open("data/clustered_traffy.csv", "rb") as f:
+            self.CLUSTER_CACHE = f.read()
+        print("Loaded!")
+
     def _initialize(self):
         load_dotenv()
+        self.load_csv()
         self.DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./data/data.db")
         self.MODEL_PATH = os.getenv("MODEL_PATH", "app/ml/model.pkl")
+        self.KMEANS_MODEL_PATH = os.getenv("KMEANS_MODEL_PATH", "ai/models/kmeans_model.pkl")
+        self.SCALER_PATH = os.getenv("SCALER_PATH", "ai/models/scaler.pkl")
         self.CSV_PATH = os.getenv("CSV_PATH", "data/clean_traffy.csv")
 
 
