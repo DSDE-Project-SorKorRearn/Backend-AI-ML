@@ -41,7 +41,7 @@ def get_map_data(db: Session, type_name: Optional[str] = None):
             Traffy.traffy_type.ilike(f"%{type_name}%")
         )
 
-    results = query.limit(10000).all()
+    results = query.all()
     processed_data = []
     
     if type_name:
