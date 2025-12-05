@@ -6,3 +6,4 @@ pydantic
 joblib
 scikit-learn
 python-dotenv
+pandasql
