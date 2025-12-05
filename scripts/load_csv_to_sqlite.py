@@ -45,8 +45,8 @@ def load_data():
                 return None, None
 
         coords = df["coords"].apply(split_coords)
-        df["latitude"] = coords.apply(lambda x: x[0])
-        df["longitude"] = coords.apply(lambda x: x[1])
+        df["latitude"] = coords.apply(lambda x: x[1])
+        df["longitude"] = coords.apply(lambda x: x[0])
         df = df.drop(columns=["coords"])
 
     # Convert timestamp and last_activity to datetime
@@ -70,7 +70,7 @@ def load_data():
     # Filter columns that exist in the dataframe and match the model (optional, but good practice)
     # For now, we assume the CSV + processing matches the model fields.
 
-    df.to_sql("traffy", engine, if_exists="replace", index=False)
+    df.to_sql("traffy", engine, if_exists="replace", index=True)
 
     print("Done!")
 

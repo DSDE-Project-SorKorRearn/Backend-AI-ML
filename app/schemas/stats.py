@@ -1,8 +1,8 @@
 from pydantic import BaseModel
-
+from typing import List
 class TimeSeriesData(BaseModel):
-    year: int
-    month: int
+    year: str
+    month: str
     count: int
 
 class ProvinceData(BaseModel):
@@ -12,3 +12,8 @@ class ProvinceData(BaseModel):
 class DistrictData(BaseModel):
     district: str
     count: int
+
+class TypeData(BaseModel):
+    traffy_type: str
+    count: int
+

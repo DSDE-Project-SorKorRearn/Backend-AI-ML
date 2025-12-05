@@ -1,8 +1,8 @@
 from pydantic import BaseModel
-
+from typing import Optional
 
 class MapPoint(BaseModel):
-    id: int
+    index: int
     latitude: float
     longitude: float
-    traffy_type: str
+    traffy_type: Optional[str]
