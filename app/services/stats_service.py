@@ -1,3 +1,6 @@
+import json
+import ast
+from collections import Counter
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -41,8 +44,22 @@ def get_district_stats_by_name(db: Session, district_name: str):
     )
 
 def get_type_stats(db: Session):
-    return (
-        db.query(Traffy.traffy_type, func.count(Traffy.index).label("count"))
-        .group_by(Traffy.traffy_type)
-        .all()
-    )
+    raw_results = db.query(Traffy.traffy_type).filter(Traffy.traffy_type != None).all()
+
+    exploded = []
+
+    for (type_str,) in raw_results:
+        if not type_str:
+            continue
+
+        # Parse Python-style list Strings
+        try:
+            parsed = ast.literal_eval(type_str)   # ← FIX
+            if isinstance(parsed, list):
+                exploded.extend(parsed)
+            else:
+                exploded.append(parsed)
+        except:
+            exploded.append(type_str)
+
+    return dict(Counter(exploded))
