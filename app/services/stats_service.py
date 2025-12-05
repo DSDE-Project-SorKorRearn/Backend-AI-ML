@@ -51,10 +51,8 @@ def get_type_stats(db: Session):
     for (type_str,) in raw_results:
         if not type_str:
             continue
-
-        # Parse Python-style list Strings
         try:
-            parsed = ast.literal_eval(type_str)   # ← FIX
+            parsed = ast.literal_eval(type_str)
             if isinstance(parsed, list):
                 exploded.extend(parsed)
             else:
