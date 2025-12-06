@@ -1,5 +1,5 @@
 import os
-
+import pandas as pd
 from dotenv import load_dotenv
 
 
@@ -14,8 +14,7 @@ class Settings:
 
     def load_csv(self):
         print("Loading CSV into RAM...")
-        with open("data/clustered_traffy.csv", "rb") as f:
-            self.CLUSTER_CACHE = f.read()
+        self.CLUSTER_DF = pd.read_csv("data/clustered_traffy.csv")
         print("Loaded!")
 
     def _initialize(self):
