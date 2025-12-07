@@ -3,11 +3,10 @@
 
 ## Structure
 
-- `ai/`: Train AI code and load to ml
+- `ai/`: Train model clustering and load to csv
 - `app/`: Main application code
   - `api/`: API endpoints
   - `db/`: Database models and connection
-  - `ml/`: ML model loading and prediction
   - `schemas/`: Pydantic models
   - `services/`: Business logic
 - `data/`: Data files (CSV, SQLite DB)
@@ -25,10 +24,16 @@
    python scripts/load_csv_to_sqlite.py
    ```
 
-3. Run server:
+3. Run AI:
+   - go to ai/
+   - run all train_model.ipynb
+
+4. Run server:
    ```bash
-   uvicorn app.main:app --reload
+   python run.py
    ```
 
-4. Docs:
-   - http://localhost:8000/docs
+5. Docs:
+   ```bash
+   http://localhost:8000/docs
+   ```
